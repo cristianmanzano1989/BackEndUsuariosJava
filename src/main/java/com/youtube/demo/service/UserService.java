@@ -23,6 +23,6 @@ public interface UserService {
 	 * Elimina un usuario con el id recibido
 	 * @param id
 	 */
-	void delete(long id);
+	void delete(User user);
 
 }

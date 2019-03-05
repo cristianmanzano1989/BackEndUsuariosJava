@@ -61,7 +61,7 @@ public class UserController {
 			throw new Exception("El id esta nulo");
 		}
 		
-		this.userService.delete(user.getId());
+		this.userService.delete(user);
 	}
 	
 	private boolean validate(User user) {
