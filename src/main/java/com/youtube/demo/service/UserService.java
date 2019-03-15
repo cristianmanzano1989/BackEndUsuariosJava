@@ -2,6 +2,7 @@ package com.youtube.demo.service;
 
 import java.util.List;
 
+import com.youtube.demo.model.Rol;
 import com.youtube.demo.model.User;
 
 public interface UserService {
@@ -24,5 +25,7 @@ public interface UserService {
 	 * @param id
 	 */
 	void delete(User user);
+	
+	public List<Rol> findAllRoles();
 
 }

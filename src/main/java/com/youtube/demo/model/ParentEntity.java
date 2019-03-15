@@ -18,7 +18,7 @@ public class ParentEntity implements Serializable{
 	private static final long serialVersionUID = -4611815928732870812L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
 	private int id;
 

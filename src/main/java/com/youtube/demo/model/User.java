@@ -1,14 +1,21 @@
 package com.youtube.demo.model;
 
+import java.util.Set;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "usuario")
@@ -29,9 +36,22 @@ public class User extends ParentEntity {
 	
 	@Column(name = "contrasena", nullable=true , length= 100)
     private String	contrasena;
-		
 	
+	@NotNull(message="El dato rol no puede ser vacío")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn
+	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	private Rol rol; 
 
+
+	public Rol getRol() {
+		return rol;
+	}
+
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
 
 	public String getContrasena() {
@@ -47,10 +67,6 @@ public class User extends ParentEntity {
 	User(){
 		
 	}
-
-
-
-
 
 	public int getCedula() {
 		return cedula;
@@ -80,22 +96,5 @@ public class User extends ParentEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
-	
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

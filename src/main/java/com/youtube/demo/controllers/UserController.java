@@ -3,7 +3,6 @@ package com.youtube.demo.controllers;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.youtube.demo.model.Rol;
 import com.youtube.demo.model.User;
 import com.youtube.demo.service.UserService;
-import com.youtube.demo.util.QueryResult;
 import com.youtube.demo.util.RestResponse;
 
 import antlr.StringUtils;
@@ -34,12 +33,7 @@ public class UserController {
 	{
 		this.mapper= new ObjectMapper();
 		User user = this.mapper.readValue(userJson,User.class);
-		
-		/*if(!this.validate(user))
-		{
-			return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(),"los campos obligatorios no estan diligenciados");
-
-		}*/
+	
 		
 		this.userService.save(user);
 		
@@ -89,6 +83,12 @@ public class UserController {
 		}
 		
 		return isValid;
+	}
+	
+	
+	@RequestMapping(value = "/roles",method = RequestMethod.GET)
+	public List<Rol> ListarRoles() {
+		return userService.findAllRoles();
 	}
 
 }
